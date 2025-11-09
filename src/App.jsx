@@ -7,13 +7,13 @@ import ContextAPI from './Components/ContextAPI'
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <ContextAPI >
+    <ContextAPI >
+      <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
         </Routes>
-      </ContextAPI>
-    </BrowserRouter>
+      </BrowserRouter>
+    </ContextAPI>
   )
 }
 
