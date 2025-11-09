@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Store } from '../Components/ContextAPI'
+
 
 const Home = () => {
+
+    const { task } = useContext(Store)
+
     return (
         <>
-            <h1>VP</h1>
+            <h2>{task}</h2>
         </>
     )
 }

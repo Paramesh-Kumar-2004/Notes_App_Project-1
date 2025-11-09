@@ -1,18 +1,18 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home'
-import { Store } from './Components/ContextAPI'
+import ContextAPI from './Components/ContextAPI'
 
 
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Store >
+      <ContextAPI >
         <Routes>
           <Route path='/' element={<Home />} />
         </Routes>
-      </Store>
+      </ContextAPI>
     </BrowserRouter>
   )
 }
