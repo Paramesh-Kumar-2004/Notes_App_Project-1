@@ -14,12 +14,20 @@ const SearchBar = () => {
 
     return (
         <>
-            <input
-                className='border-2 border-sky-600 rounded-md p-1'
-                type="text"
-                placeholder='Search Here...'
-                onChange={(e) => { HandleSearch(e) }}
-            />
+            <div className='w-full flex gap-3 justify-around'>
+
+                <input
+                    className='border-2 border-sky-400 rounded-md p-1 outline-sky-700 w-3/4'
+                    type="text"
+                    placeholder='Search Here...'
+                    onChange={(e) => { HandleSearch(e) }}
+                />
+
+                <button className='bg-blue-400 p-2 rounded-lg font-bold border-2 border-sky-900 cursor-pointer'>
+                    Create Task
+                </button >
+
+            </div>
         </>
     )
 }
