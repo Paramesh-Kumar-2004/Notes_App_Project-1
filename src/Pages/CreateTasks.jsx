@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Store } from '../Components/ContextAPI';
+
+
 
 const CreateTasks = () => {
+
+    const { task, setTask } = useContext(Store)
 
     const [data, setData] = useState({
         id: Date.now(),
         title: "",
         notes: "",
-        tags: ""
+        tags: "",
+        type: "normal"
     })
 
     const navigate = useNavigate()
@@ -22,10 +28,21 @@ const CreateTasks = () => {
     function HandleSubmit(e) {
         e.preventDefault();
         try {
-
+            const updatedTasks = [...task, data];
+            setTask(updatedTasks);
+            localStorage.setItem("task", JSON.stringify(updatedTasks));
         } catch (error) {
             console.log(error)
+        } finally {
+            setData({
+                id: Date.now(),
+                title: "",
+                notes: "",
+                tags: "",
+                type: "normal"
+            });
         }
+
     }
 
     return (
@@ -50,6 +67,7 @@ const CreateTasks = () => {
                         id="title"
                         name='title'
                         onChange={HandleChange}
+                        value={data.title}
                         placeholder="Enter Your Title"
                         required
                         className="w-full border text-sky-50 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"
@@ -68,6 +86,7 @@ const CreateTasks = () => {
                         placeholder="Write Your Notes Here..."
                         name='notes'
                         onChange={HandleChange}
+                        value={data.notes}
                         required
                         rows="4"
                         className="w-full border text-sky-50 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"
@@ -86,6 +105,7 @@ const CreateTasks = () => {
                         id="tags"
                         name='tags'
                         onChange={HandleChange}
+                        value={data.tags}
                         required
                         placeholder="e.g. Work, Study, Personal"
                         className="w-full border text-sky-50 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"

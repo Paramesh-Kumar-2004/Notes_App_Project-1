@@ -21,6 +21,13 @@ const Home = () => {
                     <SearchBar />
                 </div>
 
+                <div className='flex gap-4 justify-around mb-6'>
+                    <div>All (0)</div>
+                    <div>Pinned (0)</div>
+                    <div>Archive (0)</div>
+                    <div>Deleted (0)</div>
+                </div>
+
                 <Cards />
 
             </div>

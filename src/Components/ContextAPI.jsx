@@ -6,13 +6,13 @@ export const Store = createContext()
 
 const ContextAPI = ({ children }) => {
 
-    const [task, setTask] = useState(localStorage.getItem("task") || [])
+    const [task, setTask] = useState(JSON.parse(localStorage.getItem("task")) || []);
     const [search, setSearch] = useState("All")
 
 
 
     return (
-        <Store.Provider value={{ task, search, setSearch }}>
+        <Store.Provider value={{ task, setTask, search, setSearch }}>
             {children}
         </Store.Provider>
     )
