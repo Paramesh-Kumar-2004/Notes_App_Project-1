@@ -6,7 +6,7 @@ import Cards from '../Components/Cards'
 
 const Home = () => {
 
-    const { task } = useContext(Store)
+    const { task, allCount, archiveCount, pinnedCount, deleteCount } = useContext(Store)
 
     return (
         <>
@@ -22,10 +22,10 @@ const Home = () => {
                 </div>
 
                 <div className='flex gap-4 justify-around mb-6'>
-                    <div>All (0)</div>
-                    <div>Pinned (0)</div>
-                    <div>Archive (0)</div>
-                    <div>Deleted (0)</div>
+                    <div className='cursor-pointer font-bold'>All ({allCount})</div>
+                    <div className='cursor-pointer font-bold'>Pinned ({pinnedCount})</div>
+                    <div className='cursor-pointer font-bold'>Archive ({archiveCount})</div>
+                    <div className='cursor-pointer font-bold'>Deleted ({deleteCount})</div>
                 </div>
 
                 <Cards />
