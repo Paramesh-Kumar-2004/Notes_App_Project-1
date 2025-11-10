@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CreateTasks = () => {
 
+    const [data, setData] = useState({
+        id: Date.now(),
+        title: "",
+        notes: "",
+        tags: ""
+    })
+
+    const navigate = useNavigate()
+
+    function HandleChange(e) {
+        setData({
+            ...data,
+            [e.target.name]: e.target.value
+        })
+    }
+
     function HandleSubmit(e) {
         e.preventDefault();
-        console.log("Clicked");
+        try {
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -27,7 +48,10 @@ const CreateTasks = () => {
                     <input
                         type="text"
                         id="title"
+                        name='title'
+                        onChange={HandleChange}
                         placeholder="Enter Your Title"
+                        required
                         className="w-full border text-sky-50 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"
                     />
                 </div>
@@ -42,6 +66,9 @@ const CreateTasks = () => {
                     <textarea
                         id="notes"
                         placeholder="Write Your Notes Here..."
+                        name='notes'
+                        onChange={HandleChange}
+                        required
                         rows="4"
                         className="w-full border text-sky-50 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"
                     ></textarea>
@@ -57,17 +84,29 @@ const CreateTasks = () => {
                     <input
                         type="text"
                         id="tags"
+                        name='tags'
+                        onChange={HandleChange}
+                        required
                         placeholder="e.g. Work, Study, Personal"
                         className="w-full border text-sky-50 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"
                     />
                 </div>
 
-                <button
-                    type="submit"
-                    className="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition-all duration-300 cursor-pointer"
-                >
-                    Create Task
-                </button>
+                <div className='flex gap-6'>
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition-all duration-300 cursor-pointer"
+                    >
+                        Create Task
+                    </button>
+
+                    <button
+                        className="w-full bg-red-600 text-white font-semibold py-2 rounded-md hover:bg-red-700 transition-all duration-300 cursor-pointer"
+                        onClick={() => navigate("/")}
+                    >
+                        Cancel
+                    </button>
+                </div>
             </form>
         </div>
     );
