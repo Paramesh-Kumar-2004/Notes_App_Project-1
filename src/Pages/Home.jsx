@@ -10,14 +10,14 @@ const Home = () => {
 
     return (
         <>
-            <div className="bg-[#1B262C] text-white min-h-screen font-[Poppins,sans-serif]">
+            <div className="bg-[#1B262C] text-white min-h-screen font-[Poppins,sans-serif">
 
-                <div>
+                <div className='py-6'>
                     <h1 className='font-bold text-3xl'>My Notes</h1>
                     <p className='text-gray-500'>Add Your Tasks Here...</p>
                 </div>
 
-                <div>
+                <div className='mb-6'>
                     <SearchBar />
                 </div>
 
