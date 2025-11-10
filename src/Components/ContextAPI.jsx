@@ -7,7 +7,7 @@ export const Store = createContext()
 const ContextAPI = ({ children }) => {
 
     const [task, setTask] = useState(JSON.parse(localStorage.getItem("task")) || []);
-    const [search, setSearch] = useState("All")
+    const [search, setSearch] = useState("all")
 
 
 

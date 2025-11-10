@@ -13,7 +13,7 @@ const CreateTasks = () => {
         title: "",
         notes: "",
         tags: "",
-        type: "normal"
+        type: "all"
     })
 
     const navigate = useNavigate()
@@ -31,6 +31,7 @@ const CreateTasks = () => {
             const updatedTasks = [...task, data];
             setTask(updatedTasks);
             localStorage.setItem("task", JSON.stringify(updatedTasks));
+            navigate("/")
         } catch (error) {
             console.log(error)
         } finally {
@@ -39,7 +40,7 @@ const CreateTasks = () => {
                 title: "",
                 notes: "",
                 tags: "",
-                type: "normal"
+                type: "all"
             });
         }
 
