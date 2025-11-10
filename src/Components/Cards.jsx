@@ -4,6 +4,8 @@ import DeleteIMG from "../assets/delete.png"
 import EditIMG from "../assets/edit.png"
 import ArchiveIMG from "../assets/inbox.png"
 
+
+
 const Cards = () => {
     return (
         // <div className="bg-[#1B262C] text-[#BBE1FA] flex justify-center items-center min-h-screen font-[Poppins,sans-serif]">
@@ -23,15 +25,15 @@ const Cards = () => {
                     <img src={EditIMG} alt="Pin" className="inline" />
                     <p className="inline text-green-500" >Edit</p>
                 </div>
-                <div className="flex items-center justify-center space-x-1">
+                <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
                     <img src={PinIMG} alt="Pin" className="inline" />
                     <p className="inline text-yellow-300">Pin</p>
                 </div>
-                <div className="flex items-center justify-center space-x-1">
+                <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
                     <img src={ArchiveIMG} alt="Pin" className="inline" />
                     <p className="inline text-sky-500">Archive</p>
                 </div>
-                <div className="flex items-center justify-center space-x-1">
+                <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
                     <img src={DeleteIMG} alt="Pin" className="inline" />
                     <p className="inline text-red-600">Delete</p>
                 </div>
