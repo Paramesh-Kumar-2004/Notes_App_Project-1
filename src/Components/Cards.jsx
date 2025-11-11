@@ -9,7 +9,7 @@ import { Store } from "./ContextAPI";
 
 const Cards = () => {
 
-    const { task, setTask, filter } = useContext(Store)
+    const { task, setTask, filter, setFilter } = useContext(Store)
 
     const HandleTypeChange = (id, e) => {
         try {
@@ -19,6 +19,7 @@ const Cards = () => {
                 ele.id === id ? { ...ele, type: UpdateType } : ele
             );
             setTask(updatedTasks);
+            setFilter(UpdateType)
             localStorage.setItem("task", JSON.stringify(updatedTasks));
         } catch (error) {
             console.log(error)
@@ -66,15 +67,19 @@ const Cards = () => {
                                                 <img src={EditIMG} alt="Pin" className="inline" />
                                                 <p className="inline text-green-500">Edit</p>
                                             </div>
-                                            <div className="flex items-center justify-center space-x-1 hover:scale-125 transition duration-400">
-                                                <img src={PinIMG} alt="Pin" className="inline" />
+
+                                            <div className="flex items-center justify-center gap-0 cursor-pointer transform transition-transform duration-300">
+                                                <img src={PinIMG} alt="Pin" className="w-5 h-5" />
                                                 <button
                                                     value={ele.type === "pin" ? "all" : "pin"}
                                                     onClick={(e) => HandleTypeChange(ele.id, e)}
-                                                    className="inline text-yellow-300 cursor-pointer">
+                                                    className={`px-3 py-1 text-sm font-semibold rounded-md text-yellow-300 hover:bg-yellow-400 hover:text-[#1B262C] transition-colors duration-300 hover:scale-110 cursor-pointer`}
+                                                >
                                                     {ele.type === "pin" ? "Unpin" : "Pin"}
                                                 </button>
                                             </div>
+
+
                                             <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
                                                 <img src={ArchiveIMG} alt="Pin" className="inline" />
                                                 <p onClick={() => HandleTypeChange(ele.id, "archive")} className="inline text-sky-500">Archive</p>

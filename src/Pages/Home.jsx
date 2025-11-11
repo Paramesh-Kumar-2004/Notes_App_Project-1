@@ -6,7 +6,7 @@ import Cards from '../Components/Cards'
 
 const Home = () => {
 
-    const { task, allCount, archiveCount, pinnedCount, deleteCount, setFilter } = useContext(Store)
+    const { allCount, archiveCount, pinnedCount, deleteCount, filter, setFilter } = useContext(Store)
 
     function HandleFilter(data) {
         try {
@@ -32,22 +32,22 @@ const Home = () => {
                 <div className='flex gap-4 justify-around mb-6'>
                     <div
                         onClick={() => HandleFilter("all")}
-                        className='cursor-pointer font-bold'
+                        className={filter === "all" ? 'cursor-pointer font-bold bg-green-600 p-1 rounded-sm' : "cursor-pointer font-bold"}
                     >All ({allCount})</div>
 
                     <div
                         onClick={() => HandleFilter("pin")}
-                        className='cursor-pointer font-bold'
+                        className={filter === "pin" ? 'cursor-pointer font-bold bg-green-600 p-1 rounded-sm' : "cursor-pointer font-bold"}
                     >Pinned ({pinnedCount})</div>
 
                     <div
                         onClick={() => HandleFilter("archive")}
-                        className='cursor-pointer font-bold'
+                        className={filter === "archive" ? 'cursor-pointer font-bold bg-green-600 p-1 rounded-sm' : "cursor-pointer font-bold"}
                     >Archive ({archiveCount})</div>
 
                     <div
                         onClick={() => HandleFilter("trash")}
-                        className='cursor-pointer font-bold'
+                        className={filter === "trash" ? 'cursor-pointer font-bold bg-green-600 p-1 rounded-sm' : "cursor-pointer font-bold"}
                     >Deleted ({deleteCount})</div>
 
                 </div>
