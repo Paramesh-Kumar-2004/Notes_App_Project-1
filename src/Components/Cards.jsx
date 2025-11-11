@@ -28,21 +28,18 @@ const Cards = () => {
                                 <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
                                     {ele.notes}
                                 </p>
-                                <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
+                                {/* <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
                                     {ele.tags}
-                                </p>
-                                <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
-                                    {ele.tags}
-                                </p>
+                                </p> */}
+                                <div className="flex gap-2">
+                                    {ele.tags.map((tag, index) => (
+                                        <p key={index} className="text-[#BBE1FA] opacity-85 mb-1 leading-relaxed border-2 border-sky-500 px-2 rounded-lg bg-sky-400">
+                                            #{tag}
+                                        </p>
+                                    ))
+                                    }
+                                </div>
 
-                                <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
-                                    {ele.tags.map((tag, index) =>
-                                    return (
-                                        <div>
-                                            <p>tag</p>
-                                        </div>
-                                    ))}
-                                </p>
 
                                 <div className="flex flex-wrap items-center justify-between gap-2">
                                     <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
