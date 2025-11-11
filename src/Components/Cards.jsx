@@ -9,7 +9,7 @@ import { Store } from "./ContextAPI";
 
 const Cards = () => {
 
-    const { task, search, setTask } = useContext(Store)
+    const { task, setTask, filter } = useContext(Store)
 
     const HandleTrash = (id) => {
         console.log(id)
@@ -30,7 +30,7 @@ const Cards = () => {
 
             <div className="flex flex-wrap gap-3 text-[#BBE1FA] justify-evenly items-center font-[Poppins,sans-serif]">
                 {task.length != 0 && task.map((ele) => {
-                    if (ele.type === search) {
+                    if (ele.type === filter) {
                         return (
                             // <div className="bg-[#1B262C] text-[#BBE1FA] flex justify-center items-center min-h-screen font-[Poppins,sans-serif]">
 

@@ -14,7 +14,6 @@ const SearchBar = () => {
         setSearch(e.target.value);
     }
 
-
     return (
         <>
             <div className='w-full flex gap-3 justify-around'>
