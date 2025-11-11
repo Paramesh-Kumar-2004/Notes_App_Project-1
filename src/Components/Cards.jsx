@@ -13,7 +13,7 @@ const Cards = () => {
 
     const HandleTypeChange = (id, e) => {
         try {
-            const UpdateType = e.target.value
+            const UpdateType = e.currentTarget.value
             console.log(UpdateType)
             const updatedTasks = task.map((ele) =>
                 ele.id === id ? { ...ele, type: UpdateType } : ele
@@ -62,23 +62,23 @@ const Cards = () => {
                                             ))}
                                         </div>
 
-                                        <div className="flex flex-wrap items-center justify-between gap-2">
+                                        <div className="flex flex-wrap items-center justify-between gap-1 ">
+
                                             <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
                                                 <img src={EditIMG} alt="Pin" className="inline" />
                                                 <p className="inline text-green-500">Edit</p>
                                             </div>
 
-                                            <div className="flex items-center justify-center gap-0 cursor-pointer transform transition-transform duration-300">
-                                                <img src={PinIMG} alt="Pin" className="w-5 h-5" />
+                                            <div className="flex items-center justify-center transform transition-transform duration-300 hover:scale-110">
                                                 <button
                                                     value={ele.type === "pin" ? "all" : "pin"}
                                                     onClick={(e) => HandleTypeChange(ele.id, e)}
-                                                    className={`px-3 py-1 text-sm font-semibold rounded-md text-yellow-300 hover:bg-yellow-400 hover:text-[#1B262C] transition-colors duration-300 hover:scale-110 cursor-pointer`}
+                                                    className={`flex items-center gap-1 px-3 py-1 text-sm font-semibold rounded-md text-yellow-300 hover:bg-yellow-800 hover:text-black transition-colors duration-300 cursor-pointer`}
                                                 >
+                                                    <img src={PinIMG} alt="Pin" className="w-4 h-4" />
                                                     {ele.type === "pin" ? "Unpin" : "Pin"}
                                                 </button>
                                             </div>
-
 
                                             <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
                                                 <img src={ArchiveIMG} alt="Pin" className="inline" />
