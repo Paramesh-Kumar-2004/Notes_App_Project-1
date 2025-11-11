@@ -31,6 +31,19 @@ const Cards = () => {
                                 <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
                                     {ele.tags}
                                 </p>
+                                <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
+                                    {ele.tags}
+                                </p>
+
+                                <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
+                                    {ele.tags.map((tag, index) =>
+                                    return (
+                                        <div>
+                                            <p>tag</p>
+                                        </div>
+                                    ))}
+                                </p>
+
                                 <div className="flex flex-wrap items-center justify-between gap-2">
                                     <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
                                         <img src={EditIMG} alt="Pin" className="inline" />

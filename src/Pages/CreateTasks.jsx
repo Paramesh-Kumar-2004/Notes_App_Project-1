@@ -12,34 +12,55 @@ const CreateTasks = () => {
         id: Date.now(),
         title: "",
         notes: "",
-        tags: "",
+        tags: [],
         type: "all"
     })
+    const [tagsInput, setTagsInput] = useState("");
+
 
     const navigate = useNavigate()
 
     function HandleChange(e) {
-        setData({
-            ...data,
-            [e.target.name]: e.target.value
-        })
+        const { name, value } = e.target;
+
+        if (name === "tags") {
+            // const tagArray = value.split(",").map(tag => tag.trim()).filter(tag => tag !== "");
+            // setData({
+            //     ...data,
+            //     tags: tagArray
+            // });
+            setTagsInput(value);
+        } else {
+            setData({
+                ...data,
+                [name]: value
+            });
+        }
     }
 
     function HandleSubmit(e) {
         e.preventDefault();
         try {
-            const updatedTasks = [...task, data];
+            const tagArray = tagsInput
+                .split(",")
+                .map(tag => tag.trim())
+                .filter(tag => tag !== "");
+
+            const updatedTask = { ...data, tags: tagArray };
+            const updatedTasks = [...task, updatedTask];
             setTask(updatedTasks);
             localStorage.setItem("task", JSON.stringify(updatedTasks));
-            navigate("/")
-        } catch (error) {
+            navigate("/");
+        }
+        catch (error) {
             console.log(error)
-        } finally {
+        }
+        finally {
             setData({
                 id: Date.now(),
                 title: "",
                 notes: "",
-                tags: "",
+                tags: [],
                 type: "all"
             });
         }
@@ -106,7 +127,7 @@ const CreateTasks = () => {
                         id="tags"
                         name='tags'
                         onChange={HandleChange}
-                        value={data.tags}
+                        value={tagsInput}
                         required
                         placeholder="e.g. Work, Study, Personal"
                         className="w-full border text-sky-50 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"
