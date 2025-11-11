@@ -11,15 +11,15 @@ const Cards = () => {
 
     const { task, setTask, filter } = useContext(Store)
 
-    const HandleTrash = (id) => {
-        console.log(id)
+    const HandleTypeChange = (id, e) => {
         try {
+            const UpdateType = e.target.value
+            console.log(UpdateType)
             const updatedTasks = task.map((ele) =>
-                ele.id === id ? { ...ele, type: "trash" } : ele
+                ele.id === id ? { ...ele, type: UpdateType } : ele
             );
             setTask(updatedTasks);
             localStorage.setItem("task", JSON.stringify(updatedTasks));
-            console.log(`Moved task with id: ${id} to Trash`);
         } catch (error) {
             console.log(error)
         }
@@ -66,17 +66,22 @@ const Cards = () => {
                                                 <img src={EditIMG} alt="Pin" className="inline" />
                                                 <p className="inline text-green-500">Edit</p>
                                             </div>
-                                            <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
+                                            <div className="flex items-center justify-center space-x-1 hover:scale-125 transition duration-400">
                                                 <img src={PinIMG} alt="Pin" className="inline" />
-                                                <p className="inline text-yellow-300">Pin</p>
+                                                <button
+                                                    value={ele.type === "pin" ? "all" : "pin"}
+                                                    onClick={(e) => HandleTypeChange(ele.id, e)}
+                                                    className="inline text-yellow-300 cursor-pointer">
+                                                    {ele.type === "pin" ? "Unpin" : "Pin"}
+                                                </button>
                                             </div>
                                             <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
                                                 <img src={ArchiveIMG} alt="Pin" className="inline" />
-                                                <p className="inline text-sky-500">Archive</p>
+                                                <p onClick={() => HandleTypeChange(ele.id, "archive")} className="inline text-sky-500">Archive</p>
                                             </div>
                                             <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
                                                 <img src={DeleteIMG} alt="Pin" className="inline" />
-                                                <p onClick={() => HandleTrash(ele.id)} className="inline text-red-600">
+                                                <p onClick={() => HandleTypeChange(ele.id, "trash")} className="inline text-red-600">
                                                     Delete
                                                 </p>
                                             </div>
