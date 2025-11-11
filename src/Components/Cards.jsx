@@ -9,7 +9,21 @@ import { Store } from "./ContextAPI";
 
 const Cards = () => {
 
-    const { task, search } = useContext(Store)
+    const { task, search, setTask } = useContext(Store)
+
+    const HandleTrash = (id) => {
+        console.log(id)
+        try {
+            const updatedTasks = task.map((ele) =>
+                ele.id === id ? { ...ele, type: "trash" } : ele
+            );
+            setTask(updatedTasks);
+            localStorage.setItem("task", JSON.stringify(updatedTasks));
+            console.log(`Moved task with id: ${id} to Trash`);
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <>
@@ -28,6 +42,9 @@ const Cards = () => {
                                 <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
                                     {ele.notes}
                                 </p>
+                                <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
+                                    {ele.type}
+                                </p>
                                 {/* <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
                                     {ele.tags}
                                 </p> */}
@@ -39,8 +56,6 @@ const Cards = () => {
                                     ))
                                     }
                                 </div>
-
-
                                 <div className="flex flex-wrap items-center justify-between gap-2">
                                     <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
                                         <img src={EditIMG} alt="Pin" className="inline" />
@@ -56,7 +71,7 @@ const Cards = () => {
                                     </div>
                                     <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
                                         <img src={DeleteIMG} alt="Pin" className="inline" />
-                                        <p className="inline text-red-600">Delete</p>
+                                        <p onClick={() => HandleTrash(ele.id)} className="inline text-red-600">Delete</p>
                                     </div>
                                 </div>
                             </div>
