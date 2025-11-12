@@ -8,6 +8,6 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base: "Notes_App_Project-1"
+  base: "/Notes_App_Project-1/"
 })
 
