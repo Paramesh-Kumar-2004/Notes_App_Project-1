@@ -70,7 +70,7 @@ const Cards = () => {
                             if (ele.type === filter) {
                                 return (
                                     <div
-                                        className="bg-[#0F4C75] border-2 border-[#3282B8] rounded-2xl p-6 w-80 text-start shadow-[0_0_25px_rgba(50,130,184,0.3)] transition-transform duration-300 ease-in-out hover:-translate-y-1.5 hover:shadow-[0_0_35px_rgba(187,225,250,0.5)]"
+                                        className="bg-[#0f4c7546] border-2 border-[#3282B8] rounded-2xl p-6 w-80 text-start transition-transform duration-300 ease-in-out hover:-translate-y-1.5 hover:shadow-[0_0_14px_rgba(71,166,230,1)]"
                                         key={ele.id}
                                     >
                                         <h2 className="text-[#BBE1FA] mb-2 text-xl font-semibold">
