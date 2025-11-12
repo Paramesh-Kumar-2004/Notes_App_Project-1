@@ -19,9 +19,9 @@ const SearchBar = () => {
             <div className='w-full flex gap-3 justify-around'>
 
                 <input
-                    className='border-2 border-sky-400 text-pink-800 rounded-md p-1 outline-sky-700 w-3/4'
+                    className='border-2 border-sky-400 text-white rounded-md p-1 outline-sky-700 w-3/4'
                     type="text"
-                    placeholder='Search Here...'
+                    placeholder='Search Here Based On Tags & Notes...'
                     onChange={(e) => { HandleSearch(e) }}
                 />
 
