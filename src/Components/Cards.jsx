@@ -13,7 +13,7 @@ const Cards = () => {
 
     const navigate = useNavigate()
 
-    const { task, setTask, filter, setFilter } = useContext(Store)
+    const { task, setTask, filter, setFilter, search } = useContext(Store)
 
     const HandleTypeChange = (id, e) => {
         try {
@@ -45,13 +45,28 @@ const Cards = () => {
         }
     }
 
+    const filteredTasks = task.filter((ele) => {
+        const matchType = filter === "all" ? true : ele.type === filter;
+
+        const matchSearch =
+            search.trim() === "" ||
+            ele.title.toLowerCase().includes(search.toLowerCase()) ||
+            ele.notes.toLowerCase().includes(search.toLowerCase()) ||
+            ele.tags.some((tag) =>
+                tag.toLowerCase().includes(search.toLowerCase())
+            );
+
+        return matchType && matchSearch;
+    });
+
+
     return (
         <>
 
             <div className="flex flex-wrap gap-3 text-[#BBE1FA] justify-evenly items-center font-[Poppins,sans-serif]">
                 <div className="flex flex-wrap gap-3 text-[#BBE1FA] justify-evenly items-center font-[Poppins,sans-serif]">
-                    {task.length !== 0 && task.some((ele) => ele.type === filter) ? (
-                        task.map((ele) => {
+                    {filteredTasks.length !== 0 && task.some((ele) => ele.type === filter) ? (
+                        filteredTasks.map((ele) => {
                             if (ele.type === filter) {
                                 return (
                                     <div
