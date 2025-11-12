@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import PinIMG from "../assets/pin.png"
-import DeleteIMG from "../assets/delete.png"
 import EditIMG from "../assets/edit.png"
 import ArchiveIMG from "../assets/inbox.png"
+import DeleteIMG from "../assets/delete.png"
+import RestorePNG from "../assets/restore.png"
 import { Store } from "./ContextAPI";
 
 
@@ -19,7 +20,22 @@ const Cards = () => {
                 ele.id === id ? { ...ele, type: UpdateType } : ele
             );
             setTask(updatedTasks);
-            setFilter(UpdateType)
+            setTimeout(() => {
+                setFilter(UpdateType)
+            }, 100)
+            localStorage.setItem("task", JSON.stringify(updatedTasks));
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    const HandleDeletePermanent = (id) => {
+        try {
+            console.log("Delete : ", id)
+            const updatedTasks = task.filter((ele) => ele.id !== id);
+            setTask(updatedTasks);
+            // setFilter("all")
             localStorage.setItem("task", JSON.stringify(updatedTasks));
         } catch (error) {
             console.log(error)
@@ -62,34 +78,81 @@ const Cards = () => {
                                             ))}
                                         </div>
 
-                                        <div className="flex flex-wrap items-center justify-between gap-1 ">
+                                        <div className=" flex items-center justify-between">
 
-                                            <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
-                                                <img src={EditIMG} alt="Pin" className="inline" />
-                                                <p className="inline text-green-500">Edit</p>
-                                            </div>
+                                            {ele.type !== "trash" && (
+                                                <>
+                                                    <div className="flex items-center justify-center transform transition-transform duration-300 hover:scale-110">
+                                                        <button
+                                                            className={`flex items-center gap-1 py-1 text-sm font-semibold rounded-md text-green-600 hover:bg-green-800 hover:text-black transition-colors duration-300 cursor-pointer px-1`}
+                                                        >
+                                                            <img src={EditIMG} alt="Edit" className="w-4 h-4" />
+                                                            Edit
+                                                        </button>
+                                                    </div>
 
-                                            <div className="flex items-center justify-center transform transition-transform duration-300 hover:scale-110">
-                                                <button
-                                                    value={ele.type === "pin" ? "all" : "pin"}
-                                                    onClick={(e) => HandleTypeChange(ele.id, e)}
-                                                    className={`flex items-center gap-1 px-3 py-1 text-sm font-semibold rounded-md text-yellow-300 hover:bg-yellow-800 hover:text-black transition-colors duration-300 cursor-pointer`}
-                                                >
-                                                    <img src={PinIMG} alt="Pin" className="w-4 h-4" />
-                                                    {ele.type === "pin" ? "Unpin" : "Pin"}
-                                                </button>
-                                            </div>
+                                                    <div className="flex items-center justify-center transform transition-transform duration-300 hover:scale-110">
+                                                        <button
+                                                            value={ele.type === "pin" ? "all" : "pin"}
+                                                            onClick={(e) => HandleTypeChange(ele.id, e)}
+                                                            className={`flex items-center gap-1 py-1 text-sm font-semibold rounded-md text-yellow-300 hover:bg-yellow-800 hover:text-black transition-colors duration-300 cursor-pointer px-1`}
+                                                        >
+                                                            <img src={PinIMG} alt="Pin" className="w-4 h-4" />
+                                                            {ele.type === "pin" ? "Unpin" : "Pin"}
+                                                        </button>
+                                                    </div>
 
-                                            <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
-                                                <img src={ArchiveIMG} alt="Pin" className="inline" />
-                                                <p onClick={() => HandleTypeChange(ele.id, "archive")} className="inline text-sky-500">Archive</p>
-                                            </div>
-                                            <div className="flex items-center justify-center space-x-1 cursor-pointer hover:scale-125 transition duration-400">
-                                                <img src={DeleteIMG} alt="Pin" className="inline" />
-                                                <p onClick={() => HandleTypeChange(ele.id, "trash")} className="inline text-red-600">
-                                                    Delete
-                                                </p>
-                                            </div>
+                                                    <div className="flex items-center justify-center transform transition-transform duration-300 hover:scale-110 ">
+                                                        <button
+                                                            value={ele.type === "archive" ? "all" : "archive"}
+                                                            onClick={(e) => HandleTypeChange(ele.id, e)}
+                                                            className={`flex items-center gap-1 py-1 text-sm font-semibold rounded-md text-sky-300 hover:bg-yellow-800 hover:text-black transition-colors duration-300 cursor-pointer px-1`}
+                                                        >
+                                                            <img src={ArchiveIMG} alt="Archive" className="w-4 h-4" />
+                                                            {ele.type === "archive" ? "UnArchive" : "Archive"}
+                                                        </button>
+                                                    </div>
+
+                                                    <div className="flex items-center justify-center transform transition-transform duration-300 hover:scale-110 ">
+                                                        <button
+                                                            value={ele.type === "trash" ? "all" : "trash"}
+                                                            onClick={(e) => HandleTypeChange(ele.id, e)}
+                                                            className={`flex items-center gap-1 py-1 text-sm font-semibold rounded-md text-red-500 hover:bg-red-800 hover:text-black transition-colors duration-300 cursor-pointer px-1`}
+                                                        >
+                                                            <img src={DeleteIMG} alt="Archive" className="w-4 h-4" />
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </>
+                                            )}
+
+
+                                            {ele.type === "trash" && (
+                                                <div className="flex gap-4">
+
+                                                    <div className="flex items-center justify-center transform transition-transform duration-300 hover:scale-110 ">
+                                                        <button
+                                                            value="all"
+                                                            onClick={(e) => HandleTypeChange(ele.id, e)}
+                                                            className={`flex items-center gap-1 py-1 text-sm font-semibold rounded-md text-green-400 hover:bg-green-600 hover:text-black transition-colors duration-300 cursor-pointer`}
+                                                        >
+                                                            <img src={RestorePNG} alt="Restore" className="w-4 h-4" />
+                                                            Restore
+                                                        </button>
+                                                    </div>
+
+                                                    <div className="flex items-center justify-center transform transition-transform duration-300 hover:scale-110 ">
+                                                        <button
+                                                            value="all"
+                                                            onClick={(e) => HandleDeletePermanent(ele.id)}
+                                                            className={`flex items-center gap-1 py-1 text-sm font-semibold rounded-md text-red-600 hover:bg-red-600 hover:text-black transition-colors duration-300 cursor-pointer`}
+                                                        >
+                                                            <img src={DeleteIMG} alt="Archive" className="w-4 h-4" />
+                                                            Delete Permanent
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 );
