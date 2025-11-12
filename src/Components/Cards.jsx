@@ -5,10 +5,13 @@ import ArchiveIMG from "../assets/inbox.png"
 import DeleteIMG from "../assets/delete.png"
 import RestorePNG from "../assets/restore.png"
 import { Store } from "./ContextAPI";
+import { useNavigate } from "react-router-dom";
 
 
 
 const Cards = () => {
+
+    const navigate = useNavigate()
 
     const { task, setTask, filter, setFilter } = useContext(Store)
 
@@ -20,9 +23,9 @@ const Cards = () => {
                 ele.id === id ? { ...ele, type: UpdateType } : ele
             );
             setTask(updatedTasks);
-            setTimeout(() => {
-                setFilter(UpdateType)
-            }, 100)
+            // setTimeout(() => {
+            //     setFilter(UpdateType)
+            // }, 100)
             localStorage.setItem("task", JSON.stringify(updatedTasks));
         } catch (error) {
             console.log(error)
@@ -63,9 +66,9 @@ const Cards = () => {
                                             {ele.notes}
                                         </p>
 
-                                        <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
+                                        {/* <p className="text-[#BBE1FA] opacity-85 mb-5 leading-relaxed">
                                             {ele.type}
-                                        </p>
+                                        </p> */}
 
                                         <div className="flex gap-2">
                                             {ele.tags.map((tag, index) => (
@@ -84,6 +87,7 @@ const Cards = () => {
                                                 <>
                                                     <div className="flex items-center justify-center transform transition-transform duration-300 hover:scale-110">
                                                         <button
+                                                            onClick={() => navigate(`/edit-task/${ele.id}`)}
                                                             className={`flex items-center gap-1 py-1 text-sm font-semibold rounded-md text-green-600 hover:bg-green-800 hover:text-black transition-colors duration-300 cursor-pointer px-1`}
                                                         >
                                                             <img src={EditIMG} alt="Edit" className="w-4 h-4" />
