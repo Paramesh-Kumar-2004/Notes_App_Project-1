@@ -8,6 +8,6 @@ export default defineConfig(({ command }) => ({
     react(),
     tailwindcss()
   ],
-  base: command === 'build' ? '/Notes_App_Project-1/' : '/',
+  base: command === 'build' ? '/Notes_App_Project-2/' : '/',
 }))
 
